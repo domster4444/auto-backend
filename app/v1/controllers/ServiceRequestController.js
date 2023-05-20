@@ -62,16 +62,20 @@ export const removeServiceRequest = async (req, res) => {
 };
 
 export const updateServiceRequest = async (req, res) => {
+  console.log("===================================================");
   console.log(req.body);
   try {
     if (req.body.vehicle_id) {
+      console.log(req.body.vehicle_id);
       const actualVehicle = await Vehicle.findById(req.body.vehicle_id);
+      console.log(actualVehicle);
       req.body.vehicle = {
         number: actualVehicle.number,
         type: actualVehicle.type,
         model: actualVehicle.model,
         identity_number: actualVehicle.identity_number,
       };
+      console.log("no error yet -> -> ->");
     }
     if (req.body.issues) {
       let issues = req.body.issues;
@@ -99,7 +103,7 @@ export const updateServiceRequest = async (req, res) => {
     }
     const serviceRequest = await ServiceRequest.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true,
+      // runValidators: true,
     });
     return sendSuccessResponse(res, "Service request updated successfully.", serviceRequest);
   } catch (err) {

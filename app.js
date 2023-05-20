@@ -44,6 +44,9 @@ connectToAtlas().then((err) => {
   console.log("Database Ready for Query ....");
 });
 
+app.get("/", (req, res) => {
+  res.send("Welcome to AutoServices API");
+});
 app.use("/api/v1/report", reportRouter);
 
 app.use("/api/v1/auth", authRoutes);
