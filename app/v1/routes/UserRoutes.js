@@ -8,7 +8,7 @@ import { verifyRoles } from "../middlewares/verifyRoles.js";
 
 export const router = Router();
 
-router.route("/").post(userCreateValidation, createUser).get(verifyRoles("admin", "receptionist", "mechanic"), getAllUsers);
+router.route("/").post(createUser).get(getAllUsers);
 
 router.route("/:id").get(getUser).delete(verifyRoles("admin", "receptionist", "mechanic"), removeUser).put(verifyRoles("admin", "user", "receptionist", "mechanic"), userUpdateValidation, updateUser);
 
